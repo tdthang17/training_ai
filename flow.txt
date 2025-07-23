@@ -1,0 +1,46 @@
+fsa/
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── database.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   ├── user.py
+│   │   └── role.py
+│   ├── schemas/
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   ├── role.py
+│   │   └── auth.py
+│   ├── crud/
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   ├── user.py
+│   │   └── role.py
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── deps.py
+│   │   └── v1/
+│   │       ├── __init__.py
+│   │       ├── api.py
+│   │       └── endpoints/
+│   │           ├── __init__.py
+│   │           ├── auth.py
+│   │           ├── users.py
+│   │           └── roles.py
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── config.py
+│   │   └── security.py
+│   └── services/
+│       ├── __init__.py
+│       ├── user_service.py
+│       └── auth_service.py
+├── alembic/
+│   ├── versions/
+│   ├── env.py
+│   └── script.py.mako
+├── alembic.ini
+├── requirements.txt
+└── .env

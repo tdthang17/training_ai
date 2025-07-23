@@ -1,0 +1,19 @@
+# requirements.txt
+# This file is auto-generated. Do not edit manually.
+alembic==1.16.3
+bcrypt==4.0.1
+email_validator==2.2.0
+fastapi==0.116.0
+jose==1.0.0
+jwt==1.4.0
+mysql-connector-python==9.3.0
+passlib==1.7.4
+pydantic==2.11.7
+pydantic-settings==2.10.1
+PyMySQL==1.1.1
+python-dotenv==1.1.1
+python-jose==3.5.0
+python-multipart==0.0.20
+SQLAlchemy==2.0.41
+starlette==0.46.2
+uvicorn==0.35.0
