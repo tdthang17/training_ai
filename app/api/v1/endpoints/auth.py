@@ -4,7 +4,8 @@ from sqlalchemy.orm import Session
 from app import schemas
 from app.api import deps
 from app.services.auth_service import auth_service
-
+from app.models.token_blacklist import TokenBlacklist
+from app.database import get_db
 router = APIRouter()
 
 @router.post("/login", response_model=schemas.Token)
@@ -34,3 +35,14 @@ def read_users_me(
     Get current user
     """
     return current_user
+
+
+@router.post("/logout")
+def logout(token: str = Depends(deps.oauth2_scheme),
+           db: Session = Depends(deps.get_db)):
+    """
+    Logout user by blacklisting the token
+    """
+    db.add(TokenBlacklist(token=token))
+    db.commit()
+    return {"message": "Successfully logged out"}

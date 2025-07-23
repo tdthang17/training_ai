@@ -5,6 +5,8 @@ from sqlalchemy.orm import Session
 from app import crud, models, schemas
 from app.core.security import decode_access_token
 from app.database import get_db
+from app.models.token_blacklist import TokenBlacklist
+
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/v1/auth/login")
 
@@ -12,6 +14,14 @@ def get_current_user(
     db: Session = Depends(get_db),
     token: str = Depends(oauth2_scheme)
 ) -> models.User:
+    
+    if db.query(TokenBlacklist).filter(TokenBlacklist.token == token).first():
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token has been blacklisted",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -31,6 +41,10 @@ def get_current_user(
         raise credentials_exception
     
     return user
+
+    
+
+
 
 def get_current_active_user(
     current_user: models.User = Depends(get_current_user),
@@ -53,3 +67,5 @@ def get_current_superuser(
             status_code=400, detail="The user doesn't have enough privileges"
         )
     return current_user
+
+

@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from app.core.config import settings                                            # Import library to access settings
 from app.models.base import Base
-from app.models import user, role
+from app.models import user, role, token_blacklist 
 from alembic import context
 
 # this is the Alembic Config object, which provides
